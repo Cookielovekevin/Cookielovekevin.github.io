@@ -98,11 +98,12 @@ function addItem(){
     var table = document.getElementById("table");
     var tableBody = table.getElementsByTagName('tbody')[0];
 
-    //get all inputs we need and create td's based on it
+    //get all inputs we need and create td's based on it 
     var companyName = document.getElementById("companyNameID").value;
     if(companyName.length == 0){
         return emptyEntryError(1);
     }
+   
     var td_name = document.createElement("td");
     td_name.innerHTML = `
         <div class = "name-container">
@@ -162,6 +163,11 @@ function addItem(){
     //append this new table row to the body
     tableBody.appendChild(tableRow);
     addDelListener();
+
+    //clears field after adding except for date
+    document.getElementById("companyNameID").value = "";
+    document.getElementById("positionID").value = "";
+    document.getElementById("locationsID").value = "Select...";
 }
 
 
@@ -170,6 +176,25 @@ function delItem(button){
     var row = button.closest('tr');
     audio.play();
     row.remove();
+}
+function emptyEntryError(number){
+    switch(number){
+        case 1: // companyName box 
+        console.log("No Company Name");
+        return; 
+
+        case 2: //Position input
+        console.log("No Position");
+        return; 
+
+        case 3: //location input 
+        console.log("No Location Selected");
+        return; 
+
+        case 4: //date input
+        console.log("No Date Selected");
+        return; 
+    }
 }
 
 // add actionListener to buttons that are added
@@ -200,22 +225,26 @@ function addDelListener(){
     });
 }
 
-function emptyEntryError(number){
-    switch(number){
-        case 1: // companyName box 
-        console.log("No Company Name");
-        return; 
+function filter(){
+    var filter = document.getElementById("filterID").value.toUpperCase();
 
-        case 2: //Position input
-        console.log("No Position");
-        return; 
+    var table = document.getElementById("table");
+    var tableBody = table.getElementsByTagName('tbody')[0]; // theres only one tablebody so get first one
+    var tr = tableBody.getElementsByTagName("tr"); // use tablebody. because we are looking through rows in tablebody not whole table (exclude headers)
 
-        case 3: //location input 
-        console.log("No Location Selected");
-        return; 
+    
 
-        case 4: //date input
-        console.log("No Date Selected");
-        return; 
+    //loop through rows in tablebody and for every row we check if filter = that row's items
+    for(var i = 0; i < tr.length; i++){ //look through all rows
+        var td = tr[i].getElementsByTagName("td"); //get array of table data
+    
+        var txtValue = td[0].innerText || td[col].textContent;
+        if(txtValue.toUpperCase().indexOf(filter) > -1){ //aka it exists
+            tr[i].style.display = "";
+            
+        }
+        else tr[i].style.display = "none";
+       
     }
 }
+

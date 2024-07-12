@@ -14,7 +14,7 @@
 </head>
 <body>
     <div class="page-container">
-        <div class = "bar">
+        <div class = "top-bar">
             <label class = "bar-label" for="comp-name"> Company Name:</label>
             <input class = "comp-name" id = "companyNameID" type="text" placeholder="Enter Company Name">
 
@@ -30,6 +30,11 @@
             <label class = "date-label" for="Date">Date Applied?</label>
             <input type="date" id = "dateID" >
             <button class = "add-btn" onclick="addItem()">Add To Table</button>
+        </div>
+
+        <div class = "filter-bar">
+            <div>here will be dropdown menu for filter options</div>
+            <input type="text" id="filterID" placeholder="Search" onkeyup="filter()">
         </div>
         <table id="table">
            <thead>
