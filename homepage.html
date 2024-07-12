@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kevin's Internship Tracker</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./homepage.js"></script>
+
+    <!--Google Font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="page-container">
+        <div class = "bar">
+            <label class = "bar-label" for="comp-name"> Company Name:</label>
+            <input class = "comp-name" id = "companyNameID" type="text" placeholder="Enter Company Name">
+
+            <label class = "bar-label" for="position"> Position: </label>
+            <input class = "position" id = "positionID" type ="text" placeholder="Enter Position Type" >
+
+            <label class = "bar-label" for ="Location?"> Location?</label>
+            <select name="locations-dropdown" id="locationsID">
+                <option value="Select..."> Select.. </option>
+                <!--There is a JS adding all the states here!-->
+            </select>
+
+            <label class = "date-label" for="Date">Date Applied?</label>
+            <input type="date" id = "dateID" >
+            <button class = "add-btn" onclick="addItem()">Add To Table</button>
+        </div>
+        <table id="table">
+           <thead>
+                <tr>
+                <th>Company Name</th>
+                <th>Position</th>
+                <th>Location</th>
+                <th>Application Status</th>
+                <th>Apply Date</th>
+                <th>Notes</th>
+                </tr>
+            </thead> 
+            <tbody id ="tableBody">
+                <tr>
+                    <td id="firstBox">
+                        <div class = "name-container">
+                            <button class = "delBtn">x</button>
+                            <audio id = "popSound"></audio>
+                            <div class = "text">asd</div>
+                        </div>
+                    </td>
+                    <td>Software Internship</td>
+                    <td>NJ</td>
+                    <td>
+                        <select name="application-status" id="application-status">
+                            <option value="Select..."> Select... </option>
+                            <option value="Waiting"> Waiting </option>
+                            <option value="Interview"> Interview </option>
+                            <option value="Offer"> Offer </option>
+                            <option value="Rejected"> Rejected </option>
+                            <option value="Accepted"> Accepted</option>
+                            <option value="Ghosted"> Ghosted </option>
+                        </select>
+                    </td>
+                    <td>February 9</td>
+                    <td contenteditable="true"> Insert Notes</td>
+                </tr>
+            </tbody>
+        </table>
+        
+    </div>
+</body>
+</html> 

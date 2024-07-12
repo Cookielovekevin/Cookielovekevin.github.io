@@ -1,0 +1,124 @@
+
+:root{
+    --nav-bar: #457b9d;
+}
+*{
+    margin: 0;
+    padding: 0p;
+    box-sizing: border-box;
+    font-family: Montserrat;
+}
+html{
+    background-color: beige;
+}
+.page-container{
+    width: 100%;
+    min-height: 100vh;
+}
+.bar{
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    height: 5vh;
+    min-width: 100%;
+    max-width: 100%;
+    background-color: var(--nav-bar);
+    border-radius: 0px 0px 10px 10px;
+    gap: 1rem;
+}
+.bar-label{
+    border-radius: 3px;
+    
+}
+
+input{
+    border-radius: 10px;
+    border: none;
+    outline-color: var(--nav-bar);
+}
+
+
+
+
+
+table{
+    margin: 1rem;
+    table-layout: fixed;
+    min-width: 1rem;
+    max-width: 1rem;
+    border-collapse: collapse;
+}
+tr{
+    border: none;
+}
+
+td,th{
+    border: 1px solid black;
+    text-align: center;
+    padding: 1rem;
+}
+td{
+    padding: 0;
+}
+
+
+tbody tr #firstBox{
+    padding: 0;
+    margin: 0;
+}
+
+#application-status{
+    padding: 0rem;
+    width: 100%;
+}
+
+.name-container{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(3, 1fr)
+
+}
+
+
+.delBtn{
+    border-radius: .3rem;
+    grid-column: 1;
+    grid-row: 1;
+    text-align: middle;
+    background-color: #ebbebe;
+    border: .1rem solid #f77d7d;
+    padding: 0;
+}
+
+.delBtn:hover{
+    border-color: #ef4444;
+    cursor: pointer;
+}
+.delBtn:active{
+    background-image: linear-gradient(to right,#e66465 0%,#e66465 50%, #ebbebe 50%, #ebbebe 100%);
+    background-size: 200% 100%;
+    background-position: 0%;
+    animation-name: delete;
+    animation-duration: .5s;
+    animation-timing-function: ease-in;
+}
+
+@keyframes delete {
+    from{
+        background-position: 100%;
+    }
+    to{
+        background-position: 0%;
+    }
+}
+
+
+.text{
+    text-align: center;
+    vertical-align: middle;
+    grid-column: 3;
+    grid-row: 2;
+}
+
+
+
