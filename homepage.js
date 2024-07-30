@@ -122,10 +122,12 @@ document.addEventListener("DOMContentLoaded", function() {
             dateBox.style.color = "#ddbeaa";
         }
     })
-    })
 
+    
     console.log("del Btn");
     addDelListener();
+    })
+
 
 
     
@@ -272,7 +274,7 @@ function emptyEntryError(number){
 }
 
 /**
- * Add actionListeners to buttons
+ * Add actionListeners to DelButtons
  */
 function addDelListener(){
     const button = document.querySelectorAll('.delBtn');
