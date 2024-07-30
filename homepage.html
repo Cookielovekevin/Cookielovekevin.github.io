@@ -14,27 +14,38 @@
 </head>
 <body>
     <div class="page-container">
+        <div class = "error-popUp">
+
+        </div>
         <div class = "top-bar">
-            <label class = "bar-label" for="comp-name"> Company Name:</label>
-            <input class = "comp-name" id = "companyNameID" type="text" placeholder="Enter Company Name">
-
-            <label class = "bar-label" for="position"> Position: </label>
-            <input class = "position" id = "positionID" type ="text" placeholder="Enter Position Type" >
-
-            <label class = "bar-label" for ="Location?"> Location?</label>
-            <select name="locations-dropdown" id="locationsID">
-                <option value="Select..."> Select.. </option>
+           
+            <div class = "input-container">
+                <input class = "input-fields" id = "companyNameID" type="text" required >    
+                <div class = "input-preview" >Company Name</div>
+            </div>
+           
+            
+            <div class = "input-container">
+                <input class = "input-fields" id = "positionID" type ="text" required>
+                <div class = "input-preview">Position Name</div>
+            </div>
+   
+            <select id="locationsID"  name="locations-dropdown" >
+                <option id = "locationsDropDown" value="Location"> Location </option>
                 <!--There is a JS adding all the states here!-->
             </select>
-
-            <label class = "date-label" for="Date">Date Applied?</label>
-            <input type="date" id = "dateID" >
+        
+            <input type="date" id = "dateID" placeholder="Select a Date" >
             <button class = "add-btn" onclick="addItem()">Add To Table</button>
         </div>
 
         <div class = "filter-bar">
             <div>here will be dropdown menu for filter options</div>
-            <input type="text" id="filterID" placeholder="Search" onkeyup="filter()">
+            <div id = "search-container" class = "input-container">
+                <input type="text" id="filterID" onkeyup="filter()" required>
+                <div id = "search-preview" class = "input-preview">Search</div>
+            </div>
+            
         </div>
         <table id="table">
            <thead>
@@ -47,7 +58,9 @@
                 <th>Notes</th>
                 </tr>
             </thead> 
-            <tbody id ="tableBody">
+
+            <!-- This is just an example row to showcase -->
+            <tbody class ="tableBody">
                 <tr>
                     <td id="firstBox">
                         <div class = "name-container">

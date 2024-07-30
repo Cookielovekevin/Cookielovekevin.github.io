@@ -51,9 +51,13 @@ document.addEventListener("DOMContentLoaded", function() {
         { name: "Wisconsin", abbreviation: "WI" },
         { name: "Wyoming", abbreviation: "WY" }
       ];
-      
+    
     const selectElement = document.getElementById("locationsID");
   
+    addDelListener();
+    console.log("del Btn");
+
+
     states.forEach(function(state) {
       let option = document.createElement("option");
       option.text = state.name;
@@ -62,26 +66,80 @@ document.addEventListener("DOMContentLoaded", function() {
     });
     console.log("states added");
 
-   
-    console.log("del Btn");
-    addDelListener();
-    
-  });
-// delbtn animation
 
 
-
-//incase user does NOT want to actually delete we reset the timer if the timer has reached timeout
-/* window.addEventListener('mouseup', (e) =>{
-    if(isHolding){
-        if(delTimer){
-            clearTimeout(delTimer);
+    // locations input box action listener 
+    const loc = document.getElementById("locationsID");
+    loc.addEventListener('mousedown', () =>{
+        loc.style.color = "#e7cfbe"; 
+        loc.style.border =  "2px solid #da854d";
+    })
+    loc.addEventListener('focusout', () =>{
+        const chosen = loc.options[loc.selectedIndex].value;
+        if(chosen === 'Location'){
+            loc.style.border = "2px solid white";
+            loc.style.color = "white";
         }
-    }
-}) */
+       
+    })
+    
+    loc.addEventListener('change', () =>{
+        const chosen = loc.options[loc.selectedIndex].value;
+        console.log(chosen);
+       
+        if(chosen != 'Location'){
+            loc.style.border = "2px solid #ddbeaa" ;
+            loc.style.color = "#ddbeaa";
+        }
+        else{
+            loc.style.border = "2px solid white";
+            loc.style.color = "white";
+        }
+    })
+    console.log("locations listener added");
+
+    //datebox actionlistener
+    const dateBox = document.getElementById("dateID");
+    dateBox.addEventListener('mousedown', () =>{
+        dateBox.style.color = "#e7cfbe";
+        dateBox.style.border =  "2px solid #da854d";
+    })
+    
+    dateBox.addEventListener('focusout', ()=>{
+        const date = dateBox.value;
+        if(!date){
+            dateBox.style.border = "2px solid white";
+            dateBox.style.color = "white";
+        }
+    })
+       
+    dateBox.addEventListener('input', ()=>{
+        const date = dateBox.value;
+        if(!date) {
+            console.log(date);
+            dateBox.style.border = "2px solid white";
+            dateBox.style.color = "white"
+            console.log("date is empty");
+        }
+        else{
+            dateBox.style.border = "2px solid #ddbeaa" ;
+            dateBox.style.color = "#ddbeaa";
+        }
+    })
+    console.log("dateBox Listeners added");
+    })
+
+   
 
 
+    
 
+
+/**
+ * Converts string to "month" + "day (number)" format
+ * @param dateString - string of date ie 07/02/2005
+ * @returns string  
+ */
 function formatToMonthDay(dateString){
     var date = new Date(dateString);
     var months = ['January', 'February', 'March', 'April', 'May', 'June',
@@ -93,6 +151,10 @@ function formatToMonthDay(dateString){
     return formattedDay;
 }
 
+/**
+ * Adds item to table based on input fields 
+ * @returns 
+ */
 function addItem(){
     // add to TABLEBODY not TABLE
     var table = document.getElementById("table");
@@ -121,7 +183,7 @@ function addItem(){
 
 
     var location = document.getElementById("locationsID").value;
-    if(location === "Select..."){
+    if(location === "Location"){
         return emptyEntryError(3);
     }
     var td_loc = document.createElement("td");
@@ -130,7 +192,7 @@ function addItem(){
     var td_status = document.createElement("td");
     td_status.innerHTML =  `
         <select name="application-status" id="application-status">
-           <option value="Select..."> Select... </option>
+           <option value="Location"> Location </option>
                 <option value="Waiting"> Waiting </option>
                 <option value="Interview"> Interview </option>
                 <option value="Offer"> Offer </option>
@@ -167,16 +229,31 @@ function addItem(){
     //clears field after adding except for date
     document.getElementById("companyNameID").value = "";
     document.getElementById("positionID").value = "";
-    document.getElementById("locationsID").value = "Select...";
+    document.getElementById("locationsID").value = "Location";
+
+    //resetting color locationsBox since it is dependent on user interaction to change color
+    var locBox = document.getElementById("locationsID");
+    locBox.style.border = "2px solid white";
+    locBox.style.color = "white";
 }
 
-
+/**
+ * Helper method for addDelListener
+ * @param {Button} button - removes the row associated with button 
+ */
 function delItem(button){
     var audio = new Audio("assets/sounds/happy-pop-3-185288.mp3");
     var row = button.closest('tr');
     audio.play();
     row.remove();
 }
+
+/**
+ * Helper method for addItem
+ * -- Returns a popUp window depending on missing entry
+ * @param {String} number 
+ * @returns 
+ */
 function emptyEntryError(number){
     switch(number){
         case 1: // companyName box 
@@ -197,13 +274,16 @@ function emptyEntryError(number){
     }
 }
 
-// add actionListener to buttons that are added
+/**
+ * Add actionListeners to Delbuttons
+ */
 function addDelListener(){
-    const button = document.querySelectorAll('button');
+    const button = document.querySelectorAll('.delBtn');
     const delTimeout = 500; 
     let delTimer; 
     let isHoldingDel;
-    
+
+    console.log("DelListeners successful");
 
     button.forEach(button => {
         button.addEventListener("mousedown", (event) => {
@@ -211,13 +291,13 @@ function addDelListener(){
             delTimer = setTimeout(() => {
                 delItem(event.target); // Pass event.target to delItem function
             }, delTimeout)
-            
+
         });
         button.addEventListener("mouseup", () => {
             isHoldingDel = false;
             clearTimeout(delTimer); // Cancel the timeout if button is released
         });
-    
+
         button.addEventListener("mouseleave", () => {
             isHoldingDel = false;
             clearTimeout(delTimer); // Cancel the timeout if mouse leaves the button
@@ -225,6 +305,9 @@ function addDelListener(){
     });
 }
 
+/**
+ * hides rows that do not contain letters according to filter
+ */
 function filter(){
     var filter = document.getElementById("filterID").value.toUpperCase();
 
@@ -247,4 +330,3 @@ function filter(){
        
     }
 }
-
