@@ -94,6 +94,7 @@ document.addEventListener("DOMContentLoaded", function() {
     })
 
 
+    console.log("Date listener");
     const dateBox = document.getElementById("dateID");
     //datebox actionlistener
     dateBox.addEventListener('mousedown', () =>{
