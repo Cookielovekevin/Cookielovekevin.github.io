@@ -54,20 +54,16 @@ document.addEventListener("DOMContentLoaded", function() {
     
     const selectElement = document.getElementById("locationsID");
   
-    addDelListener();
-    console.log("del Btn");
-
-
+    console.log("states added");
     states.forEach(function(state) {
       let option = document.createElement("option");
       option.text = state.name;
       option.value = state.abbreviation;
       selectElement.appendChild(option);
     });
-    console.log("states added");
 
 
-
+    console.log("locations listener");
     // locations input box action listener 
     const loc = document.getElementById("locationsID");
     loc.addEventListener('mousedown', () =>{
@@ -96,10 +92,10 @@ document.addEventListener("DOMContentLoaded", function() {
             loc.style.color = "white";
         }
     })
-    console.log("locations listener added");
 
-    //datebox actionlistener
+
     const dateBox = document.getElementById("dateID");
+    //datebox actionlistener
     dateBox.addEventListener('mousedown', () =>{
         dateBox.style.color = "#e7cfbe";
         dateBox.style.border =  "2px solid #da854d";
@@ -126,14 +122,15 @@ document.addEventListener("DOMContentLoaded", function() {
             dateBox.style.color = "#ddbeaa";
         }
     })
-    console.log("dateBox Listeners added");
     })
 
-   
+    console.log("del Btn");
+    addDelListener();
 
 
     
 
+    
 
 /**
  * Converts string to "month" + "day (number)" format
@@ -275,31 +272,26 @@ function emptyEntryError(number){
 }
 
 /**
- * Add actionListeners to Delbuttons
+ * Add actionListeners to buttons
  */
 function addDelListener(){
     const button = document.querySelectorAll('.delBtn');
     const delTimeout = 500; 
     let delTimer; 
-    let isHoldingDel;
-
-    console.log("DelListeners successful");
+    
 
     button.forEach(button => {
         button.addEventListener("mousedown", (event) => {
-            isHoldingDel = true; 
             delTimer = setTimeout(() => {
                 delItem(event.target); // Pass event.target to delItem function
             }, delTimeout)
 
         });
         button.addEventListener("mouseup", () => {
-            isHoldingDel = false;
             clearTimeout(delTimer); // Cancel the timeout if button is released
         });
 
         button.addEventListener("mouseleave", () => {
-            isHoldingDel = false;
             clearTimeout(delTimer); // Cancel the timeout if mouse leaves the button
         });
     });
