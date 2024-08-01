@@ -179,6 +179,7 @@ td,th{
     border: 1px solid black;
     text-align: center;
     padding: 1rem;
+    max-width: 10rem;
 }
 td{
     padding: 0;
